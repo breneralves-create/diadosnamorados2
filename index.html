@@ -334,23 +334,58 @@ window.addEventListener('load', function() {
     }
   }
 
-  document.getElementById('surprise-btn').onclick = () => {
-    const modal = document.getElementById('surprise-modal');
-    modal.classList.add('show');
-    msgIndex = 0;
-    document.getElementById('surprise-loading').style.display = 'block';
-    document.getElementById('surprise-title').style.display = 'none';
-    document.getElementById('surprise-text').style.display = 'none';
-    document.getElementById('more-reason-btn').style.display = 'none';
+document.getElementById('surprise-btn').onclick = () => {
+  const modal = document.getElementById('surprise-modal');
+  modal.classList.add('show');
+
+  msgIndex = 0;
+
+  document.getElementById('surprise-loading').style.display = 'block';
+  document.getElementById('surprise-title').style.display = 'none';
+  document.getElementById('surprise-text').style.display = 'none';
+  document.getElementById('more-reason-btn').style.display = 'none';
+
+  const loading = document.getElementById('surprise-loading');
+
+  const loadingTexts = [
+    "Carregando presente... 27%",
+    "Carregando presente... 64%",
+    "Consultando os registros do relacionamento ❤️",
+    "Calculando quantas vezes você me chamou de chato 🤔",
+    "Resultado encontrado...",
+    "⚠️ ERRO CRÍTICO",
+    "Motivo: excesso de beleza detectado 👀",
+    "Reiniciando sistema..."
+  ];
+
+  let i = 0;
+
+  loading.textContent = loadingTexts[0];
+
+  const interval = setInterval(() => {
+    i++;
+
+    if (i < loadingTexts.length) {
+      loading.textContent = loadingTexts[i];
+    }
+  }, 1000);
+
+  setTimeout(() => {
+    clearInterval(interval);
+
+    loading.textContent = "Brincadeira 😂❤️";
 
     setTimeout(() => {
       document.getElementById('surprise-loading').style.display = 'none';
       document.getElementById('surprise-title').style.display = 'block';
       document.getElementById('surprise-text').style.display = 'flex';
       document.getElementById('more-reason-btn').style.display = 'inline-block';
+
       showMessage(msgIndex);
     }, 1800);
-  };
+
+  }, 8500);
+};
 
   document.getElementById('close-surprise').onclick = () => document.getElementById('surprise-modal').classList.remove('show');
 
