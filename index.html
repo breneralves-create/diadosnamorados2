@@ -26,7 +26,7 @@
     100% { transform:translateY(-100vh) rotate(360deg); opacity:0; }
   }
   #slideshow {
-    position:relative; width:min(420px,90vw); height:min(560px,72vh);
+    position:relative; width:min(420px,90vw); height:min(560px,62vh);
     z-index:10; border-radius:20px; overflow:hidden;
     box-shadow:0 0 60px rgba(255,80,120,0.4),0 0 120px rgba(255,80,120,0.15);
   }
@@ -88,7 +88,7 @@
   .signature { text-align:right; margin-top:22px; color:#ff4d7e; font-size:17px; font-style:italic; }
   #close-letter { position:absolute; top:14px; right:14px; background:rgba(255,255,255,0.07); border:none; border-radius:50%; width:34px; height:34px; color:#fff; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
   #main-title { color:#fff; font-size:11px; letter-spacing:3px; text-transform:uppercase; opacity:0.4; margin-bottom:10px; z-index:10; }
-  #heart { font-size:22px; animation:pulse 1.4s ease-in-out infinite; z-index:10; margin-top:8px; margin-bottom:14px; }
+  #heart { font-size:20px; animation:pulse 1.4s ease-in-out infinite; z-index:10; margin-top:10px; margin-bottom:10px; }
   @keyframes pulse { 0%,100%{transform:scale(1);}50%{transform:scale(1.28);} }
   #loading { position:fixed; inset:0; background:#0a0a0f; z-index:999; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#ff4d7e; font-size:18px; gap:16px; }
   #loading-heart { font-size:48px; animation:pulse 1s ease-in-out infinite; }
@@ -96,11 +96,13 @@
 
   /* Botão surpresa */
   #surprise-btn {
-    margin-top: 6px;
+    margin-top: 2px;
+    margin-bottom: 70px;
     background:linear-gradient(135deg,#ff4d7e,#c0392b); border:none; border-radius:30px;
     padding:12px 26px; color:#fff; font-size:14px; cursor:pointer; z-index:15;
     box-shadow:0 4px 24px rgba(255,77,126,0.6); font-family:Georgia,serif;
     animation: pulse 1.8s ease-in-out infinite;
+    flex-shrink: 0;
   }
   #surprise-modal {
     position:fixed; inset:0; z-index:300; background:rgba(0,0,0,0.94);
@@ -125,12 +127,18 @@
   }
   #close-surprise { position:absolute; top:14px; right:14px; background:rgba(255,255,255,0.07); border:none; border-radius:50%; width:34px; height:34px; color:#fff; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
 
-  /* Ajustes leves para telas baixas (mobile), sem cortar o slideshow */
+  /* Ajustes leves para telas baixas (mobile) */
   @media (max-height: 680px) {
-    #heart { margin-bottom: 8px; font-size: 18px; }
-    #surprise-btn { padding: 10px 22px; font-size: 13px; margin-top: 4px; }
-    #dots { margin-top: 8px; }
+    #slideshow { height: 56vh; }
+    #heart { margin-top: 6px; margin-bottom: 6px; font-size: 16px; }
+    #surprise-btn { padding: 10px 22px; font-size: 13px; margin-bottom: 60px; }
+    #dots { margin-top: 6px; }
     #main-title { margin-bottom: 4px; font-size: 10px; }
+  }
+  @media (max-height: 600px) {
+    #slideshow { height: 50vh; }
+    .counter-num { font-size: 16px; }
+    #surprise-btn { margin-bottom: 50px; }
   }
 </style>
 </head>
