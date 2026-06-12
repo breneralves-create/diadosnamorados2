@@ -26,7 +26,7 @@
     100% { transform:translateY(-100vh) rotate(360deg); opacity:0; }
   }
   #slideshow {
-    position:relative; width:min(420px,90vw); height:min(500px,58vh);
+    position:relative; width:min(420px,90vw); height:min(560px,72vh);
     z-index:10; border-radius:20px; overflow:hidden;
     box-shadow:0 0 60px rgba(255,80,120,0.4),0 0 120px rgba(255,80,120,0.15);
   }
@@ -88,7 +88,7 @@
   .signature { text-align:right; margin-top:22px; color:#ff4d7e; font-size:17px; font-style:italic; }
   #close-letter { position:absolute; top:14px; right:14px; background:rgba(255,255,255,0.07); border:none; border-radius:50%; width:34px; height:34px; color:#fff; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
   #main-title { color:#fff; font-size:11px; letter-spacing:3px; text-transform:uppercase; opacity:0.4; margin-bottom:10px; z-index:10; }
-  #heart { font-size:22px; animation:pulse 1.4s ease-in-out infinite; z-index:10; margin-top:8px; margin-bottom:16px; }
+  #heart { font-size:22px; animation:pulse 1.4s ease-in-out infinite; z-index:10; margin-top:8px; margin-bottom:14px; }
   @keyframes pulse { 0%,100%{transform:scale(1);}50%{transform:scale(1.28);} }
   #loading { position:fixed; inset:0; background:#0a0a0f; z-index:999; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#ff4d7e; font-size:18px; gap:16px; }
   #loading-heart { font-size:48px; animation:pulse 1s ease-in-out infinite; }
@@ -96,9 +96,9 @@
 
   /* Botão surpresa */
   #surprise-btn {
-    margin-bottom: 60px;
+    margin-top: 6px;
     background:linear-gradient(135deg,#ff4d7e,#c0392b); border:none; border-radius:30px;
-    padding:14px 28px; color:#fff; font-size:15px; cursor:pointer; z-index:15;
+    padding:12px 26px; color:#fff; font-size:14px; cursor:pointer; z-index:15;
     box-shadow:0 4px 24px rgba(255,77,126,0.6); font-family:Georgia,serif;
     animation: pulse 1.8s ease-in-out infinite;
   }
@@ -120,21 +120,17 @@
     background:rgba(255,77,126,0.15); border:1px solid rgba(255,77,126,0.4); border-radius:30px;
     padding:10px 20px; color:#ff4d7e; font-size:13px; cursor:pointer; font-family:Georgia,serif; display:none;
   }
+  #more-reason-btn.final {
+    background:linear-gradient(135deg,#ff4d7e,#c0392b); border:none; color:#fff;
+  }
   #close-surprise { position:absolute; top:14px; right:14px; background:rgba(255,255,255,0.07); border:none; border-radius:50%; width:34px; height:34px; color:#fff; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
 
-  /* Ajustes para telas baixas (mobile) */
-  @media (max-height: 700px) {
-    #slideshow { height: 50vh; }
+  /* Ajustes leves para telas baixas (mobile), sem cortar o slideshow */
+  @media (max-height: 680px) {
     #heart { margin-bottom: 8px; font-size: 18px; }
-    #surprise-btn { padding: 10px 22px; font-size: 13px; margin-bottom: 40px; }
+    #surprise-btn { padding: 10px 22px; font-size: 13px; margin-top: 4px; }
     #dots { margin-top: 8px; }
-    #main-title { margin-bottom: 6px; }
-  }
-  @media (max-height: 600px) {
-    #slideshow { height: 46vh; }
-    #counter { gap: 8px; }
-    .counter-num { font-size: 16px; }
-    #surprise-btn { margin-bottom: 30px; }
+    #main-title { margin-bottom: 4px; font-size: 10px; }
   }
 </style>
 </head>
@@ -164,7 +160,7 @@
 <div id="dots"></div>
 <div id="heart">❤️</div>
 
-<button id="surprise-btn">Clique aqui, Vi 👇</button>
+<button id="surprise-btn">Clique aqui, meu bem 👇</button>
 
 <div id="surprise-modal">
   <div id="surprise-content">
@@ -200,7 +196,7 @@
     <p>E é por isso que, neste Dia dos Namorados, eu quero que você saiba o quanto eu te amo e o quanto admiro a mulher incrível que você se tornou. Tive o privilégio de acompanhar cada fase, cada conquista, cada mudança e cada amadurecimento. E, sinceramente, tenho muito orgulho da pessoa que você é hoje.</p>
     <p>Daqui a pouco você já estará com 25 anos... Como o tempo passa rápido! Parece que foi ontem que começamos nossa história, e hoje já estamos aqui, falando sobre casamento, nossa casa e a família que vamos construir.</p>
     <p>Você é e sempre será minha eterna namorada. E, se eu pudesse escolher mil vezes, em todas elas eu escolheria você.</p>
-    <p>Feliz Dia dos Namorados, minha Vi. ❤️</p>
+    <p>Feliz Dia dos Namorados, meu bem. ❤️</p>
     <div class="verse">"1 Coríntios 13:4 — O amor é paciente, o amor é bondoso. Não inveja, não se vangloria, não se orgulha."</div>
     <div class="signature">Com amor,<br>Brener 🌹</div>
   </div>
@@ -286,22 +282,54 @@ window.addEventListener('load', function() {
   document.getElementById('letter-btn').onclick = () => document.getElementById('letter-modal').classList.add('show');
   document.getElementById('close-letter').onclick = () => document.getElementById('letter-modal').classList.remove('show');
 
-  // Surprise button
-  const REASONS = [
-    "Porque você aguenta meu time perdendo e ainda me consola 😂⚽",
-    "Porque seu abraço resolve qualquer dia ruim 🤗",
-    "Porque você ri das minhas piadas ruins (a maioria, pelo menos) 😅",
-    "Porque mesmo brava você é a pessoa mais linda do mundo 🥰",
-    "Porque com você o futuro parece mais leve e mais bonito ❤️",
-    "Porque você é meu lugar favorito no mundo 🏡",
-    "Porque até suas reclamações (chatinha 😂) eu amo",
-    "Porque cada dia ao seu lado é um motivo de gratidão 🙏",
-    "Porque você é a Vi mais incrível que existe, e ponto final ✨"
+  // Surprise button - sequência com humor + romance, terminando convidando para a carta
+  const MESSAGES = [
+    {
+      title: "🎁 Presente desbloqueado!",
+      text: "Parabéns! Você acaba de desbloquear: 1 namorado apaixonado, vitalício, sem trocas nem devoluções 💍❤️",
+      btn: "Quero mais um 👀"
+    },
+    {
+      title: "🛠️ Garantia estendida",
+      text: "Atenção: este namorado vem com garantia vitalícia contra mau humor, mas ainda assim pode pedir colo às vezes 🥺",
+      btn: "Mais um, vai 😏"
+    },
+    {
+      title: "⚽ Aviso importante",
+      text: "Durante os jogos do meu time, o nível de atenção pode cair drasticamente. Mas o nível de amor por você? Esse nunca abaixa 😅❤️",
+      btn: "Mais um 👀"
+    },
+    {
+      title: "🍳 Funcionalidades extras",
+      text: "Inclui: buscar coisas na cozinha quando chamado (mesmo reclamando), abraços de urso e parceria pra sempre 🤗",
+      btn: "Só mais um..."
+    },
+    {
+      title: "💌 Última atualização disponível",
+      text: "Tem uma carta especial esperando por você... e nela está tudo o que eu realmente queria te dizer hoje.",
+      btn: "Abrir a Carta 💌"
+    }
   ];
+
+  let msgIndex = 0;
+
+  function showMessage(idx) {
+    const m = MESSAGES[idx];
+    document.getElementById('surprise-title').textContent = m.title;
+    document.getElementById('surprise-text').textContent = m.text;
+    const btn = document.getElementById('more-reason-btn');
+    btn.textContent = m.btn;
+    if (idx === MESSAGES.length - 1) {
+      btn.classList.add('final');
+    } else {
+      btn.classList.remove('final');
+    }
+  }
 
   document.getElementById('surprise-btn').onclick = () => {
     const modal = document.getElementById('surprise-modal');
     modal.classList.add('show');
+    msgIndex = 0;
     document.getElementById('surprise-loading').style.display = 'block';
     document.getElementById('surprise-title').style.display = 'none';
     document.getElementById('surprise-text').style.display = 'none';
@@ -311,16 +339,22 @@ window.addEventListener('load', function() {
       document.getElementById('surprise-loading').style.display = 'none';
       document.getElementById('surprise-title').style.display = 'block';
       document.getElementById('surprise-text').style.display = 'flex';
-      document.getElementById('surprise-text').textContent = "Parabéns! Você acaba de desbloquear: 1 namorado apaixonado, vitalício, sem trocas nem devoluções 💍❤️";
       document.getElementById('more-reason-btn').style.display = 'inline-block';
+      showMessage(msgIndex);
     }, 1800);
   };
 
   document.getElementById('close-surprise').onclick = () => document.getElementById('surprise-modal').classList.remove('show');
 
   document.getElementById('more-reason-btn').onclick = () => {
-    const r = REASONS[Math.floor(Math.random() * REASONS.length)];
-    document.getElementById('surprise-text').textContent = r;
+    if (msgIndex === MESSAGES.length - 1) {
+      // Última: fecha a surpresa e abre a carta
+      document.getElementById('surprise-modal').classList.remove('show');
+      document.getElementById('letter-modal').classList.add('show');
+      return;
+    }
+    msgIndex++;
+    showMessage(msgIndex);
   };
 
   // Particles
