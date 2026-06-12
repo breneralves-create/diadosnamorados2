@@ -88,11 +88,39 @@
   .signature { text-align:right; margin-top:22px; color:#ff4d7e; font-size:17px; font-style:italic; }
   #close-letter { position:absolute; top:14px; right:14px; background:rgba(255,255,255,0.07); border:none; border-radius:50%; width:34px; height:34px; color:#fff; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
   #main-title { color:#fff; font-size:11px; letter-spacing:3px; text-transform:uppercase; opacity:0.4; margin-bottom:10px; z-index:10; }
-  #heart { font-size:22px; animation:pulse 1.4s ease-in-out infinite; z-index:10; margin-top:8px; margin-bottom:60px; }
+  #heart { font-size:22px; animation:pulse 1.4s ease-in-out infinite; z-index:10; margin-top:8px; margin-bottom:16px; }
   @keyframes pulse { 0%,100%{transform:scale(1);}50%{transform:scale(1.28);} }
   #loading { position:fixed; inset:0; background:#0a0a0f; z-index:999; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#ff4d7e; font-size:18px; gap:16px; }
   #loading-heart { font-size:48px; animation:pulse 1s ease-in-out infinite; }
   #loading p { font-size:13px; color:rgba(255,255,255,0.4); letter-spacing:2px; }
+
+  /* Botão surpresa */
+  #surprise-btn {
+    margin-bottom: 60px;
+    background:linear-gradient(135deg,#ff4d7e,#c0392b); border:none; border-radius:30px;
+    padding:14px 28px; color:#fff; font-size:15px; cursor:pointer; z-index:15;
+    box-shadow:0 4px 24px rgba(255,77,126,0.6); font-family:Georgia,serif;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  #surprise-modal {
+    position:fixed; inset:0; z-index:300; background:rgba(0,0,0,0.94);
+    display:none; align-items:center; justify-content:center; padding:20px;
+  }
+  #surprise-modal.show { display:flex; }
+  #surprise-content {
+    background:linear-gradient(145deg,#1a0a12,#0f0a1a);
+    border:1px solid rgba(255,77,126,0.3); border-radius:20px;
+    max-width:420px; width:100%; padding:36px 28px; text-align:center;
+    color:#f5e6ee; position:relative;
+  }
+  #surprise-content h3 { color:#ff4d7e; font-size:18px; margin-bottom:14px; }
+  #surprise-text { font-size:15px; line-height:1.8; margin-bottom:20px; min-height:60px; display:flex; align-items:center; justify-content:center; }
+  #surprise-loading { color:rgba(255,255,255,0.5); font-size:13px; margin-bottom:16px; }
+  #more-reason-btn {
+    background:rgba(255,77,126,0.15); border:1px solid rgba(255,77,126,0.4); border-radius:30px;
+    padding:10px 20px; color:#ff4d7e; font-size:13px; cursor:pointer; font-family:Georgia,serif; display:none;
+  }
+  #close-surprise { position:absolute; top:14px; right:14px; background:rgba(255,255,255,0.07); border:none; border-radius:50%; width:34px; height:34px; color:#fff; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
 </style>
 </head>
 <body>
@@ -120,6 +148,18 @@
 
 <div id="dots"></div>
 <div id="heart">❤️</div>
+
+<button id="surprise-btn">Clique aqui, Vi 👇</button>
+
+<div id="surprise-modal">
+  <div id="surprise-content">
+    <button id="close-surprise">✕</button>
+    <div id="surprise-loading">Carregando seu presente... 99% (travou de novo, igual seu wifi 😅)</div>
+    <h3 id="surprise-title" style="display:none;">🎁 Presente desbloqueado!</h3>
+    <div id="surprise-text" style="display:none;"></div>
+    <button id="more-reason-btn">Quero mais um 👀</button>
+  </div>
+</div>
 
 <div id="music-bar">
   <button id="play-btn">▶</button>
@@ -230,6 +270,43 @@ window.addEventListener('load', function() {
   // Letter
   document.getElementById('letter-btn').onclick = () => document.getElementById('letter-modal').classList.add('show');
   document.getElementById('close-letter').onclick = () => document.getElementById('letter-modal').classList.remove('show');
+
+  // Surprise button
+  const REASONS = [
+    "Porque você aguenta meu time perdendo e ainda me consola 😂⚽",
+    "Porque seu abraço resolve qualquer dia ruim 🤗",
+    "Porque você ri das minhas piadas ruins (a maioria, pelo menos) 😅",
+    "Porque mesmo brava você é a pessoa mais linda do mundo 🥰",
+    "Porque com você o futuro parece mais leve e mais bonito ❤️",
+    "Porque você é meu lugar favorito no mundo 🏡",
+    "Porque até suas reclamações (chatinha 😂) eu amo",
+    "Porque cada dia ao seu lado é um motivo de gratidão 🙏",
+    "Porque você é a Vi mais incrível que existe, e ponto final ✨"
+  ];
+
+  document.getElementById('surprise-btn').onclick = () => {
+    const modal = document.getElementById('surprise-modal');
+    modal.classList.add('show');
+    document.getElementById('surprise-loading').style.display = 'block';
+    document.getElementById('surprise-title').style.display = 'none';
+    document.getElementById('surprise-text').style.display = 'none';
+    document.getElementById('more-reason-btn').style.display = 'none';
+
+    setTimeout(() => {
+      document.getElementById('surprise-loading').style.display = 'none';
+      document.getElementById('surprise-title').style.display = 'block';
+      document.getElementById('surprise-text').style.display = 'flex';
+      document.getElementById('surprise-text').textContent = "Parabéns! Você acaba de desbloquear: 1 namorado apaixonado, vitalício, sem trocas nem devoluções 💍❤️";
+      document.getElementById('more-reason-btn').style.display = 'inline-block';
+    }, 1800);
+  };
+
+  document.getElementById('close-surprise').onclick = () => document.getElementById('surprise-modal').classList.remove('show');
+
+  document.getElementById('more-reason-btn').onclick = () => {
+    const r = REASONS[Math.floor(Math.random() * REASONS.length)];
+    document.getElementById('surprise-text').textContent = r;
+  };
 
   // Particles
   const particlesEl = document.getElementById('particles');
